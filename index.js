@@ -26,13 +26,13 @@ function get_weather_details(city) {
   if (city == "") {
     weather_xhr.open(
       "GET",
-      "http://api.weatherapi.com/v1/current.json?key=5033a3357e7c4a27879111340221807&q=Jaipur&days=1&aqi=yes&alerts=no",
+      "https://api.weatherapi.com/v1/current.json?key=5033a3357e7c4a27879111340221807&q=Jaipur&days=1&aqi=yes&alerts=no",
       true
     );
   } else {
     weather_xhr.open(
       "GET",
-      `http://api.weatherapi.com/v1/current.json?key=5033a3357e7c4a27879111340221807&q=${city}&days=1&aqi=yes`,
+      `https://api.weatherapi.com/v1/current.json?key=5033a3357e7c4a27879111340221807&q=${city}&days=1&aqi=yes`,
       true
     );
   }
