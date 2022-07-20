@@ -162,7 +162,12 @@ function get_weather_details(city) {
         document.getElementsByTagName(
           "body"
         )[0].style.backgroundImage = `url('images/bg/mist.webp')`;
-      } else {
+      } else if (weather_text == "Patchy light rain with thunder") {
+        document.getElementsByTagName(
+          "body"
+        )[0].style.backgroundImage = `url('images/bg/patchy_rain_possible.jpg')`;
+      }
+      else {
         document.getElementsByTagName(
           "body"
         )[0].style.backgroundImage = `url('images/636070138268132665-ThinkstockPhotos-491701259.webp')`;
