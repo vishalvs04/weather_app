@@ -1,10 +1,24 @@
 import { codes } from "./codes.js";
-
-// import {codes} from './codes.js'
 window.onload = function () {
-  let city = "Jaipur";
-  get_weather_details(city);
-  get_forecast_details(city);
+  if (localStorage.getItem('home_city')==null){
+    localStorage.setItem("home_city", "");
+  }else{
+
+    let home_city=localStorage.getItem("home_city")
+    let add_city;
+    if(home_city=="" || home_city==undefined || home_city=='undefined'){
+      add_city=prompt('Enter your home city:')
+        let body=document.getElementsByTagName('body');
+        body=body[0]
+        body.style.fliter='blur(30px)';
+        localStorage.setItem('home_city',`${add_city}`)
+        body.innerHTML='<h1>Reload and add a city to continue</h1>'
+    }else{
+      let city = localStorage.home_city;
+      get_weather_details(city);
+      get_forecast_details(city);
+    }
+  }
 };
 let search_btn = document.getElementById("search_btn");
 let search_txt = document.getElementById("search");
@@ -156,6 +170,7 @@ function get_weather_details(city) {
       }
     } else {
       alert("some error");
+      localStorage.setItem("home_city", "");
     }
   };
   weather_xhr.send();
@@ -229,6 +244,8 @@ function get_forecast_details(city) {
       }
     } else {
       console.log("Error");
+      localStorage.setItem('home_city','')
+      
     }
   };
 
