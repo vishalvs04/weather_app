@@ -184,7 +184,7 @@ function get_forecast_details(city) {
       for (let i = 0; i < forecast_by_hr.length; i++) {
         let icon_code;
         let icon_time;
-        // console.log(forecast_by_hr[i].condition.code)
+        
         for (let j = 0; j < codes.length; j++) {
           if (codes[j].code === forecast_by_hr[i].condition.code) {
             if (forecast_by_hr[i].is_day == 1) {
@@ -194,7 +194,7 @@ function get_forecast_details(city) {
               icon_code = codes[j].icon;
               icon_time = "night";
             }
-            // console.log('Found')
+        
           }
         }
         let date = new Date();
