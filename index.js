@@ -126,7 +126,12 @@ function get_weather_details(city) {
         document.getElementsByTagName(
           "body"
         )[0].style.backgroundImage = `url('images/cloudy2.jfif')`;
-      } else {
+      }else if (weather_text == "Light rain") {
+        document.getElementsByTagName(
+          "body"
+        )[0].style.backgroundImage = `url('images/bg/Overcast.jpg')`;
+      }
+      else {
         document.getElementsByTagName(
           "body"
         )[0].style.backgroundImage = `url('images/636070138268132665-ThinkstockPhotos-491701259.webp')`;
