@@ -27,24 +27,21 @@
     </nav>
 
     <div class="container" id="temp_area">
-      <h1 id="temperature" class="temp"></h1>
+      <h1 id="temperature"></h1>
+      <div class="temps"></div>
       <h2 id="weather_type" class="temp"></h2>
       <h2 id="city" class="temp"></h2>
       <p id="weather_text" class="temp" style="font-size: 15px"></p>
       <p id="last_updated" class="temp"></p>
       <p id="current_time" class="temp"></p>
+      <p id="day_night_temp_icon" class="temp"></p>
     </div>
-    <div class="bottom_container" id="bottom_container">
-      <div class="wind" id="wind"></div>
-      <div id="day_night_temp_icon"></div>
-      <div class="feels_temp" id="feels_temp"></div>
+
+    <div class="weather_info" id="weather_info">
+      <table id="weather_info_table"></table>
     </div>
-    <!-- <div id="ten_day_forecast_list">
-        <ul id="ten_day_list">
-        </ul>
-      </div> -->
+
     <div class="day_forecast_container" id="day_forecast_container"></div>
-    <!-- <div class="fixed_cont"></div> -->
     <script type="module" src="./index.js"></script>
   </body>
 </html>

@@ -47,32 +47,44 @@ function get_weather_details(city) {
       last_updated.innerText = `Last Updated On: ${weather_obj.current.last_updated.slice(
         11
       )}`;
-      let current_time=document.getElementById('current_time');
+      let current_time = document.getElementById("current_time");
       current_time.innerText = `${weather_obj.location.localtime.slice(11)}`;
       document.getElementById(
         "city"
       ).innerText = `${weather_obj.location.name}, ${weather_obj.location.region}`;
-      let wind = document.getElementById("wind");
-      wind.innerHTML = `
-      <table id="wind_information">
-      <tr><td>Wind Speed</td><td>Wind Direction</td></tr>
-      <tr id="wind_info">
-      <td>${weather_obj.current.wind_kph} Km/H</td>
-      <td>${weather_obj.current.wind_dir}</td>
+      let table = document.getElementById("weather_info_table");
+      table.innerHTML = `
+      <tr class="table_content_row_1">
+      <tr class="table_content_inner_row_1">
+      <td id="real_feel">Real Feels</td>
+      <td id="humidity">Humidity</td>
       </tr>
-      </table>
-        `;
-      let feels_temp = document.getElementById("feels_temp");
-      feels_temp.innerHTML = `
-      <table id="feels_like_info">
-      <tr><td>Feels Like</td></tr>
-      <tr id="feels_like_temp">
-      <td>${weather_obj.current.feelslike_c}°C</td>
-      <td>${weather_obj.current.feelslike_f}°F</td>
+      <tr class="table_content_inner_row_2">
+      <td id="real_feel_value">${weather_obj.current.feelslike_c}°C</td>
+      <td id="humidity_value">${weather_obj.current.humidity}%</td>
       </tr>
-      </table>
-
-        `;
+      </tr>
+      <tr class="table_content_row_1">
+      <tr class="table_content_inner_row_1">
+      <td id="chance_of_rain">Chances of Rain</td>
+      <td id="pressure">Pressure</td>
+      </tr>
+      <tr class="table_content_inner_row_2">
+      <td id="chances_of_rain_value"></td>
+      <td id="pressure_value">${weather_obj.current.pressure_mb} mbar</td>
+      </tr>
+      </tr>
+      <tr class="table_content_row_1">
+      <tr class="table_content_inner_row_1">
+      <td id="wind_speed">Wind Speed</td>
+      <td id="uv_index">UV Index</td>
+      </tr>
+      <tr class="table_content_inner_row_2">
+      <td id="wind_speed_value">${weather_obj.current.wind_kph}km/h</td>
+      <td id="uv_index">${weather_obj.current.uv}</td>
+      </tr>
+      </tr>
+      `;
       for (let index = 0; index < codes.length; index++) {
         let element = codes[index];
         // console.log(weather_obj.current.condition.code);
@@ -98,7 +110,10 @@ function get_weather_details(city) {
         document.getElementsByTagName(
           "body"
         )[0].style.backgroundImage = `url('images/sunny_weather.jpg')`;
-      } else if (weather_text == "Moderate or heavy rain shower") {
+      } else if (
+        weather_text == "Moderate or heavy rain shower" ||
+        weather_text == "Moderate rain"
+      ) {
         document.getElementsByTagName(
           "body"
         )[0].style.backgroundImage = `url('images/bg/moderate_or_heavy_rain_with_shower.jpg')`;
@@ -126,12 +141,15 @@ function get_weather_details(city) {
         document.getElementsByTagName(
           "body"
         )[0].style.backgroundImage = `url('images/cloudy2.jfif')`;
-      }else if (weather_text == "Light rain") {
+      } else if (weather_text == "Light rain") {
         document.getElementsByTagName(
           "body"
         )[0].style.backgroundImage = `url('images/bg/Overcast.jpg')`;
-      }
-      else {
+      } else if (weather_text == "Mist") {
+        document.getElementsByTagName(
+          "body"
+        )[0].style.backgroundImage = `url('images/bg/mist.webp')`;
+      } else {
         document.getElementsByTagName(
           "body"
         )[0].style.backgroundImage = `url('images/636070138268132665-ThinkstockPhotos-491701259.webp')`;
@@ -162,6 +180,7 @@ function get_forecast_details(city) {
     if (this.status === 200) {
       weather_forcast_obj = JSON.parse(this.responseText);
       let forecast_by_hr = weather_forcast_obj.forecast.forecastday[0].hour;
+      console.log(weather_forcast_obj);
       let html = ``;
       for (let i = 0; i < forecast_by_hr.length; i++) {
         let icon_code;
@@ -179,12 +198,20 @@ function get_forecast_details(city) {
             // console.log('Found')
           }
         }
-        html += `<div class="card" id="hour_${i}" style="aligh_items:center;font-family:'Aclonica', sans-serif;">${forecast_by_hr[
+        let date = new Date();
+        let hour = date.getHours();
+        if (i == hour) {
+          let chance_of_rain = document.getElementById("chances_of_rain_value");
+          chance_of_rain.innerHTML = `${forecast_by_hr[i].chance_of_rain}%`;
+        }
+
+        html += `<div class="card" id="hour_${i}" style="align_items:center;font-family:'Aclonica', sans-serif;margin:25px 0;">${forecast_by_hr[
           i
         ].time.slice(11)}
                     <div class="card-body">
                     <img src="images/${icon_time}/${icon_code}.png" style="height:30px; width:30px; ">
-                        <h2 class="card-title" style="text-align:center;font-family:'Aclonica', sans-serif;">${
+                        <h2 class="card-title" 
+                        style="text-align:center;padding-top:5px;font-family:'Aclonica', sans-serif;justify-content:center;">${
                           forecast_by_hr[i].temp_c
                         }°C</h2><br>
                         <p style="font-family:'Aclonica', sans-serif;">${
@@ -198,7 +225,8 @@ function get_forecast_details(city) {
       }
       document.getElementById("day_forecast_container").innerHTML = html;
       for (let i = 0; i < forecast_by_hr.length; i++) {
-        document.getElementById(`hour_${i}`).style.marginLeft = "100px";
+        document.getElementById(`hour_${i}`).style.marginLeft = "60px";
+        document.getElementById(`hour_${i}`).style.marginRight = "60px";
       }
     } else {
       console.log("Error");
