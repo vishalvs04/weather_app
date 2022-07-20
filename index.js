@@ -3,7 +3,6 @@ window.onload = function () {
   if (localStorage.getItem('home_city')==null){
     localStorage.setItem("home_city", "");
   }else{
-
     let home_city=localStorage.getItem("home_city")
     let add_city;
     if(home_city=="" || home_city==undefined || home_city=='undefined'){
