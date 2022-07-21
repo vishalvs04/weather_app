@@ -162,7 +162,12 @@ function get_weather_details(city) {
         document.getElementsByTagName(
           "body"
         )[0].style.backgroundImage = `url('images/bg/mist.webp')`;
-      } else if (weather_text == "Patchy light rain with thunder") {
+      }else if (weather_text == "Torrential rain shower") {
+        document.getElementsByTagName(
+          "body"
+        )[0].style.backgroundImage = `url('images/bg/moderate_or_heavy_rain_with_thunder.jpg')`;
+      }
+      else if (weather_text == "Patchy light rain with thunder") {
         document.getElementsByTagName(
           "body"
         )[0].style.backgroundImage = `url('images/bg/patchy_rain_possible.jpg')`;
