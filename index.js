@@ -140,9 +140,6 @@ function get_forecast_details(city) {
       weather_forcast_obj = JSON.parse(this.responseText);
       let forecast_by_hr = weather_forcast_obj.forecast.forecastday[0].hour;
       let html = ``;
-
-      console.log(weather_forcast_obj)
-      console.log(forecast_by_hr)
       for (let i = 0; i < forecast_by_hr.length; i++) {
         let icon_code;
         let icon_time;
