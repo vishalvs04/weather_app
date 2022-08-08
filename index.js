@@ -18,6 +18,9 @@ window.onload = function () {
       get_forecast_details(city);
     }
   }
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+ // some code..
+}
 };
 let search_btn = document.getElementById("search_btn");
 let search_txt = document.getElementById("search");
@@ -26,6 +29,7 @@ search_btn.addEventListener("click", () => {
   get_weather_details(city);
   search_txt.value = "";
 });
+
 search_txt.addEventListener("keypress", (event) => {
   if (event.keyCode === 13) {
     let city = search_txt.value;
@@ -118,55 +122,55 @@ function get_weather_details(city) {
         }
       }
 
-      let weather_text = weather_obj.current.condition.text;
-      if (weather_text == "Sunny") {
-        document.getElementsByTagName(
-          "body"
-        )[0].style.backgroundImage = `url('images/sunny_weather.jpg')`;
-      } else if (
-        weather_text == "Moderate or heavy rain shower" ||
-        weather_text == "Moderate rain"
-      ) {
-        document.getElementsByTagName(
-          "body"
-        )[0].style.backgroundImage = `url('images/bg/moderate_or_heavy_rain_with_shower.jpg')`;
-      } else if (weather_text == "Moderate or heavy rain with thunder") {
-        document.getElementsByTagName(
-          "body"
-        )[0].style.backgroundImage = `url('images/bg/moderate_or_heavy_rain_with_thunder.jpg')`;
-      } else if (weather_text == "Overcast") {
-        document.getElementsByTagName(
-          "body"
-        )[0].style.backgroundImage = `url('images/bg/Overcast.jpg')`;
-      } else if (weather_text == "Partly cloudy") {
-        document.getElementsByTagName(
-          "body"
-        )[0].style.backgroundImage = `url('images/bg/partly_cloudy.jpg')`;
-      } else if (weather_text == "Patchy rain possible") {
-        document.getElementsByTagName(
-          "body"
-        )[0].style.backgroundImage = `url('images/bg/patchy_rain_possible.jpg')`;
-      } else if (weather_text == "Thunder outbreaks possible") {
-        document.getElementsByTagName(
-          "body"
-        )[0].style.backgroundImage = `url('images/bg/thunder_outbreaks_possible.jfif')`;
-      } else if (weather_text == "Cloudy") {
-        document.getElementsByTagName(
-          "body"
-        )[0].style.backgroundImage = `url('images/cloudy2.jfif')`;
-      } else if (weather_text == "Light rain") {
-        document.getElementsByTagName(
-          "body"
-        )[0].style.backgroundImage = `url('images/bg/Overcast.jpg')`;
-      } else if (weather_text == "Mist") {
-        document.getElementsByTagName(
-          "body"
-        )[0].style.backgroundImage = `url('images/bg/mist.webp')`;
-      } else {
-        document.getElementsByTagName(
-          "body"
-        )[0].style.backgroundImage = `url('images/636070138268132665-ThinkstockPhotos-491701259.webp')`;
-      }
+      // let weather_text = weather_obj.current.condition.text;
+      // if (weather_text == "Sunny") {
+      //   document.getElementsByTagName(
+      //     "body"
+      //   )[0].style.backgroundImage = `url('images/sunny_weather.jpg')`;
+      // } else if (
+      //   weather_text == "Moderate or heavy rain shower" ||
+      //   weather_text == "Moderate rain"
+      // ) {
+      //   document.getElementsByTagName(
+      //     "body"
+      //   )[0].style.backgroundImage = `url('images/bg/moderate_or_heavy_rain_with_shower.jpg')`;
+      // } else if (weather_text == "Moderate or heavy rain with thunder") {
+      //   document.getElementsByTagName(
+      //     "body"
+      //   )[0].style.backgroundImage = `url('images/bg/moderate_or_heavy_rain_with_thunder.jpg')`;
+      // } else if (weather_text == "Overcast") {
+      //   document.getElementsByTagName(
+      //     "body"
+      //   )[0].style.backgroundImage = `url('images/bg/Overcast.jpg')`;
+      // } else if (weather_text == "Partly cloudy") {
+      //   document.getElementsByTagName(
+      //     "body"
+      //   )[0].style.backgroundImage = `url('images/bg/partly_cloudy.jpg')`;
+      // } else if (weather_text == "Patchy rain possible") {
+      //   document.getElementsByTagName(
+      //     "body"
+      //   )[0].style.backgroundImage = `url('images/bg/patchy_rain_possible.jpg')`;
+      // } else if (weather_text == "Thunder outbreaks possible") {
+      //   document.getElementsByTagName(
+      //     "body"
+      //   )[0].style.backgroundImage = `url('images/bg/thunder_outbreaks_possible.jfif')`;
+      // } else if (weather_text == "Cloudy") {
+      //   document.getElementsByTagName(
+      //     "body"
+      //   )[0].style.backgroundImage = `url('images/cloudy2.jfif')`;
+      // } else if (weather_text == "Light rain") {
+      //   document.getElementsByTagName(
+      //     "body"
+      //   )[0].style.backgroundImage = `url('images/bg/Overcast.jpg')`;
+      // } else if (weather_text == "Mist") {
+      //   document.getElementsByTagName(
+      //     "body"
+      //   )[0].style.backgroundImage = `url('images/bg/mist.webp')`;
+      // } else {
+      //   document.getElementsByTagName(
+      //     "body"
+      //   )[0].style.backgroundImage = `url('images/636070138268132665-ThinkstockPhotos-491701259.webp')`;
+      // }
     } else {
       alert("some error");
       localStorage.setItem("home_city", "");
@@ -175,26 +179,20 @@ function get_weather_details(city) {
   weather_xhr.send();
 }
 function get_forecast_details(city) {
-  let forecast_xhr = new XMLHttpRequest();
-  if (city == "") {
+  let forecast_xhr = new XMLHttpRequest(); 
     forecast_xhr.open(
       "GET",
-      "https://api.weatherapi.com/v1/forecast.json?key=5033a3357e7c4a27879111340221807&q=Jaipur&days=1&aqi=yes&alerts=no",
-      true
-    );
-  } else {
-    forecast_xhr.open(
-      "GET",
-      `https://api.weatherapi.com/v1/forecast.json?key=5033a3357e7c4a27879111340221807&q=${city}&days=1&aqi=yes&alerts=no`,
-      true
-    );
-  }
+      `https://api.weatherapi.com/v1/forecast.json?key=5033a3357e7c4a27879111340221807&q=${city}&days=1&aqi=yes&alerts=no`,)
+   
   let weather_forcast_obj;
   forecast_xhr.onload = function () {
     if (this.status === 200) {
       weather_forcast_obj = JSON.parse(this.responseText);
       let forecast_by_hr = weather_forcast_obj.forecast.forecastday[0].hour;
       let html = ``;
+
+      console.log(weather_forcast_obj)
+      console.log(forecast_by_hr)
       for (let i = 0; i < forecast_by_hr.length; i++) {
         let icon_code;
         let icon_time;
@@ -208,7 +206,6 @@ function get_forecast_details(city) {
               icon_code = codes[j].icon;
               icon_time = "night";
             }
-        
           }
         }
         let date = new Date();

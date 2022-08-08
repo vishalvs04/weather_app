@@ -5,28 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
-<!--     <link rel="shortcut icon" href="/images/logo.ico" /> -->
+    <link rel="shortcut icon" href="./images/logo.ico" type="image/x-icon">
+
     <title>Weather App</title>
   </head>
   <body>
-    <nav class="navbar">
-      <ul class="navbar-list">
-        <img src="images/logo.png" alt="weather-logo" id="navbar-logo" />
-        <li class="navbar-items"><a href="./"> Home</a></li>
-        <input
-          type="text"
-          name="search"
-          id="search"
-          placeholder="Search a city"
-          class="search_city"
-        />
-        <button type="button" id="search_btn" class="search_city">
-          Search
-        </button>
-      </ul>
-    </nav>
+    
+    <div class="all_content">
+      <nav>
+        <ul>
+          <li>
+            <input type="text" class="search" id="search" placeholder="Search for a city">
 
-    <div class="container" id="temp_area">
+          </li>
+          <li>
+            <button id="search_btn">Search</button>
+
+          </li>
+
+        </ul>
+      </nav>
+      <div class="container" id="temp_area">
       <h1 id="temperature"></h1>
       <div class="temps"></div>
       <h2 id="weather_type" class="temp"></h2>
@@ -43,5 +42,6 @@
 
     <div class="day_forecast_container" id="day_forecast_container"></div>
     <script type="module" src="./index.js"></script>
+    </div>
   </body>
 </html>
